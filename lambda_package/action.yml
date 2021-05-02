@@ -1,0 +1,25 @@
+name: 'Package python lambda'
+description: |
+  Builds a python package for lambda
+  Assumes a suitable python version is currently available (uses the current default)
+inputs:
+  base-directory:  
+    description: 'Base directory where Pipfile/Pipfile.lock are located'
+    required: false
+    default: './'
+  src:  
+    description: 'Source directory of python lambda code, with relation to base-directory'
+    required: true
+  output-package:
+    description: 'output zip file'
+    required: false
+    default: 'python-package.zip'
+runs:
+  using: "composite"
+  steps:
+    - id: zip-package 
+      run: |
+        ${{ github.action_path }}/build_package.sh ${{ inputs.base-directory }} \
+          ${{ inputs.base-directory }}/${{ inputs.src }} \
+          ${{ inputs.output-package }}
+      shell: bash
