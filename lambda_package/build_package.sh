@@ -26,7 +26,7 @@ pushd $local_directory
 #   https://github.com/pypa/pip/issues/4390
 pipenv lock -r | sed 's/-e //g' > $tmp_requirements_file
 
-cp -R $src_dir/ $tmp_dir/
+cp -R $src_dir/* $tmp_dir/
 pip install -r $tmp_requirements_file -t $tmp_dir
 
 pushd $tmp_dir
